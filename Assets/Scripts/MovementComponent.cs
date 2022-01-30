@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 
 public class MovementComponent : MonoBehaviour
 {
-    //movement variables
     [SerializeField]
     float walkSpeed = 5;
     [SerializeField]
@@ -13,19 +12,23 @@ public class MovementComponent : MonoBehaviour
     [SerializeField]
     float jumpForce = 5;
 
-    //components
     PlayerController playerController;
     Rigidbody rigidbody;
     Animator playerAnimator;
+    public GameObject followTransform;
 
-    // movement references
     Vector2 inputVector = Vector2.zero;
     Vector3 moveDirection = Vector3.zero;
+    Vector2 lookInput = Vector2.zero;
+
+    public float aimSensitivity;
 
     public readonly int movementXHash = Animator.StringToHash("MovementX");
     public readonly int movementYHash = Animator.StringToHash("MovementY");
     public readonly int isJumpingHash = Animator.StringToHash("IsJumping");
     public readonly int isRunningHash = Animator.StringToHash("IsRunning");
+    public readonly int isFiringHash = Animator.StringToHash("IsFiring");
+    public readonly int isReloadingHash = Animator.StringToHash("IsReloading");
 
     private void Awake()
     {
@@ -36,12 +39,34 @@ public class MovementComponent : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        followTransform.transform.rotation *= Quaternion.AngleAxis(lookInput.x * aimSensitivity, Vector3.up);
+        followTransform.transform.rotation *= Quaternion.AngleAxis(lookInput.y * aimSensitivity, Vector3.left);
+
+        var angles = followTransform.transform.localEulerAngles;
+        angles.z = 0;
+
+        var angle = followTransform.transform.localEulerAngles.x;
+
+
+        if (angle > 180 && angle < 300)
+        {
+            angles.x = 300;
+        }
+        else if(angle < 180 && angle > 70)
+        {
+            angles.x = 70;
+        }
+
+        followTransform.transform.localEulerAngles = angles;
+        transform.rotation = Quaternion.Euler(0, followTransform.transform.rotation.eulerAngles.y, 0);
+        followTransform.transform.localEulerAngles = new Vector3(angles.x, 0, 0);
+
         if (playerController.isJumping) return;
         if (!(inputVector.magnitude > 0)) moveDirection = Vector3.zero;
 
@@ -49,9 +74,7 @@ public class MovementComponent : MonoBehaviour
         float currentSpeed = playerController.isRunning ? runSpeed : walkSpeed;
 
         Vector3 movementDirection = moveDirection * (currentSpeed * Time.deltaTime);
-
         transform.position += movementDirection;
-
     }
 
     public void OnMovement(InputValue value)
@@ -69,11 +92,28 @@ public class MovementComponent : MonoBehaviour
 
     public void OnJump(InputValue value)
     {
-        if (playerController.isJumping) return;
-
-        playerController.isJumping = value.isPressed;
+        playerController.isJumping = value.isPressed;               
         rigidbody.AddForce((transform.up + moveDirection) * jumpForce, ForceMode.Impulse);
         playerAnimator.SetBool(isJumpingHash, playerController.isJumping);
+    }
+
+    public void OnAim(InputValue value)
+    {
+        playerController.isAiming = value.isPressed;
+    }
+    public void OnLook(InputValue value)
+    {
+        lookInput = value.Get<Vector2>();
+    }
+    public void OnReload(InputValue value)
+    {
+        playerController.isReloading = value.isPressed;
+        playerAnimator.SetBool(isReloadingHash, playerController.isReloading);
+    }
+    public void OnFire(InputValue value)
+    {
+        playerController.isFiring = value.isPressed;
+        playerAnimator.SetBool(isFiringHash, playerController.isFiring);
     }
 
     private void OnCollisionEnter(Collision collision)
