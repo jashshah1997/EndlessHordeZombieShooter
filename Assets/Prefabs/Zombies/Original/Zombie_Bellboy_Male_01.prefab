@@ -3292,8 +3292,10 @@ GameObject:
   - component: {fileID: 4243538704547566}
   - component: {fileID: 95921630161195528}
   - component: {fileID: 1046843828499879407}
+  - component: {fileID: 1557747009561810854}
   - component: {fileID: 6198095533082378527}
   - component: {fileID: 5435009037744572090}
+  - component: {fileID: 6242370577606993327}
   m_Layer: 0
   m_Name: Zombie_Bellboy_Male_01
   m_TagString: Untagged
@@ -3376,7 +3378,7 @@ Animator:
   m_GameObject: {fileID: 1418193975600942}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: b20a3c10714a6ac439af479e3273de65, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 576d891560b38dc4eab8348b22bb1dbb, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -3402,6 +3404,20 @@ MonoBehaviour:
   zombieAnimator: {fileID: 95921630161195528}
   zombieStateMachine: {fileID: 5435009037744572090}
   followTarget: {fileID: 0}
+--- !u!114 &1557747009561810854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1418193975600942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4169bf06dbe0ce24493783e64191a166, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 150
+  maxHealth: 150
 --- !u!195 &6198095533082378527
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -3412,7 +3428,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 1.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -3421,7 +3437,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: 0
+  m_BaseOffset: -0.1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!114 &5435009037744572090
@@ -3436,6 +3452,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2143accf330ff504492dbf7d8f3c0f3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!136 &6242370577606993327
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1418193975600942}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.47
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &1423411692011380
 GameObject:
   m_ObjectHideFlags: 0

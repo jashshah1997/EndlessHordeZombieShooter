@@ -62,7 +62,6 @@ public class MovementComponent : MonoBehaviour
         float aimAngle = followTransform.transform.localEulerAngles.x;
         aimAngle = (aimAngle > 180) ? aimAngle - 360 : aimAngle;
         float val = (aimAngle + offsetToZero) / (range);
-        print(val);
         playerAnimator.SetFloat(verticalAimHash, val);
 
         if (angle > 180 && angle < 300)
