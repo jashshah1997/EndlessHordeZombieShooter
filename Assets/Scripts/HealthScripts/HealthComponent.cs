@@ -32,4 +32,11 @@ public class HealthComponent : MonoBehaviour, IDamageable
         }
     }
 
+    public void HealPlayer(int value)
+    {
+        if (currentHealth < maxHealth)
+        {
+            currentHealth = Mathf.Clamp(currentHealth + value, 0, maxHealth);
+        }
+    }
 }

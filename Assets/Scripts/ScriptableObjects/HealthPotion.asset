@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ccf026deba0d2544b01fb822aa6c5e3, type: 3}
+  m_Script: {fileID: 11500000, guid: 6743a322dabec794a8f2efb57dac843b, type: 3}
   m_Name: HealthPotion
   m_EditorClassIdentifier: 
   name: HealthPotion

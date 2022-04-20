@@ -24,6 +24,5 @@ public class ZombieSpawner : MonoBehaviour
         GameObject zombieToSpawn = zombiePrefab[Random.Range(0, zombiePrefab.Length)];
         SpawnerVolume spawnVolume = spawnVolumes[Random.Range(0, spawnVolumes.Length)];
         GameObject zombie = Instantiate(zombieToSpawn, spawnVolume.GetPositionInBounds(), spawnVolume.transform.rotation);
-        Debug.Log("herer");
     }
 }

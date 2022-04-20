@@ -42,6 +42,11 @@ public class ItemPickupComponent : MonoBehaviour
     {
         if (!other.CompareTag("Player")) return;
 
+        var playerInventory = other.GetComponent<InventoryComponent>();
+        if (playerInventory)
+        {
+            playerInventory.AddItem(itemInstance, amount);
+        }
         //TODO: add to inventory here
         //TODO: get reference to the player inventory, add item to it
 

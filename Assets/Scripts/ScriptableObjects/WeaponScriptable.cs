@@ -18,6 +18,8 @@ public class WeaponScriptable : EquippableScriptable
         {
             //TODO: invoke OnWeaponEquipped 
             //TODO: equip weapon from weapon holder on playercontroller
+            playerController.weaponHolder.EquipWeapon(this);
+            //PlayerEvents.InvokeOnWeaponEquipped(itemPrefab.GetComponent<WeaponComponent>());
         }
 
         base.UseItem(playerController);
